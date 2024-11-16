@@ -9,4 +9,9 @@ class InventoryLog extends Model
 {
     /** @use HasFactory<\Database\Factories\InventoryLogFactory> */
     use HasFactory;
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

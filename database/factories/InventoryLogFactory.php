@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class InventoryLogFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "quantity_changed" => fake()->numberBetween(-100, 100),
+            "type" => fake()->randomElement(["add", "remove"]),
+            "product_id" => Product::factory()
         ];
     }
 }

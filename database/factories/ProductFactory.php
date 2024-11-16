@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "name" => fake()->word,
+            "sku" => fake()->unique()->slug,
+            "stock" => fake()->numberBetween(0, 100),
+            "price" => fake()->numberBetween(0, 100),
+            "supplier_id" => Supplier::factory()
         ];
     }
 }
