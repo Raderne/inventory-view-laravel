@@ -1,5 +1,5 @@
 <x-wrapper>
     <x-slot:header>
-        Dashboard
+        staff
     </x-slot:header>
 </x-wrapper>
