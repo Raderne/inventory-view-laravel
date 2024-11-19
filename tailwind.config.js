@@ -18,6 +18,11 @@ export default {
                 black: "#1c1c1c",
                 dark: "#2b2b2b",
                 light_blue: "#f2f6f9",
+                cards: {
+                    1: "#e5def0",
+                    2: "#d6edd9",
+                    3: "#f6f0d8",
+                },
             },
         },
     },

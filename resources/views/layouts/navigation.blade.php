@@ -12,7 +12,7 @@
                 bx bxs-dashboard
             </x-nav-link>
 
-            <x-nav-link href="/supplies" :active="request()->is('supplies')"
+            <x-nav-link href="/suppliers" :active="request()->is('supplies')"
                 title="Supplies">
                 bx bxs-add-to-queue
             </x-nav-link>

@@ -13,6 +13,6 @@ class InventoryLogSeeder extends Seeder
      */
     public function run(): void
     {
-        InventoryLog::factory(3)->create();
+        InventoryLog::factory(4)->create();
     }
 }

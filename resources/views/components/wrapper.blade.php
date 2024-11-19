@@ -4,7 +4,7 @@
 
     <div class="flex items-center justify-between">
         @if ($header)
-        <h1 class="text-4xl font-semibold font-hanken-grotesk text-gray-900">{{ $header }}</h1>
+        <h1 class="text-4xl font-semibold font-hanken-grotesk text-gray-900 mb-3">{{ $header }}</h1>
         @endif
 
         <div class="flex items-center gap-x-2">
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <div class="">
+    <div class="h-[90%] overflow-y-auto mt-6">
         {{ $slot }}
     </div>
 
