@@ -25,16 +25,8 @@
                         <p class="text-sm break-words">{{ $supp->email }}</p>
                     </div>
                     <div>
-                        <button form="delete-supplier-form-{{ $supp->id }}" class="bg-red-700/50 hover:bg-red-700/70 transition-300 text-white  px-4 py-2 rounded">Remove</button>
+                        <button class="bg-blue-700/50 hover:bg-red-700/70 transition-300 text-white  px-4 py-2 rounded">View</button>
                     </div>
-                    <form
-                        action="/suppliers/{{ $supp->id }}"
-                        method="post"
-                        class="hidden"
-                        id="delete-supplier-form-{{ $supp->id }}">
-                        @csrf
-                        @method('delete')
-                    </form>
                 </article>
                 @endforeach
             </div>
@@ -52,11 +44,16 @@
                         <p class="text-sm break-words">{{ $supp->email }}</p>
                     </div>
                     <div>
-                        <a href="/supplier/{{ $supp->id }}"
-                            class="bg-red-700/50 hover:bg-red-700/70 transition-300 text-white  px-4 py-2 rounded">
-                            Remove
-                        </a>
+                        <button form="delete-supplier-form-{{ $supp->id }}" class="bg-red-700/50 hover:bg-red-700/70 transition-300 text-white  px-4 py-2 rounded">Remove</button>
                     </div>
+                    <form
+                        action="/suppliers/{{ $supp->id }}"
+                        method="post"
+                        class="hidden"
+                        id="delete-supplier-form-{{ $supp->id }}">
+                        @csrf
+                        @method('delete')
+                    </form>
                 </article>
                 @endforeach
                 @endif

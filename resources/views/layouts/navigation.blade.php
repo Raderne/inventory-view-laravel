@@ -30,10 +30,20 @@
 
         <!-- logout -->
         <div class="">
-            <x-nav-link href="#" :active="request()->routeIs('logout')"
-                title="Logout">
-                bx bxs-log-out-circle
-            </x-nav-link>
+            @auth
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit" class="text-2xl text-white" title="Logout">
+                    <i class="bx bxs-log-out-circle"></i>
+                </button>
+            </form>
+            @endauth
+
+            @guest
+            <a href="{{ route('login') }}" class="text-2xl text-white" title="Login">
+                <i class='bx bx-log-in text-xl'></i>
+            </a>
+            @endguest
         </div>
     </div>
 </nav>

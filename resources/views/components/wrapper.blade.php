@@ -36,7 +36,12 @@
                 <x-slot name="content">
                     <div class="py-1 bg-white">
                         <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                        <span class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</span>
+                        <!-- <div class="w-full"> -->
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button type="submit" class="w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+                        </form>
+                        <!-- </div> -->
                     </div>
                 </x-slot>
             </x-dropdown>
@@ -55,7 +60,7 @@
         </div>
     </div>
 
-    <div class="h-[90%] overflow-y-auto mt-6">
+    <div class="h-[90%] overflow-y-auto mt-3">
         {{ $slot }}
     </div>
 
