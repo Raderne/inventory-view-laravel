@@ -21,7 +21,7 @@
         @include('layouts.navigation')
 
         <!-- Page Content -->
-        <main class="flex-1 bg-white rounded-3xl p-6 pl-12 overflow-hidden">
+        <main class="flex-1 bg-white rounded-3xl p-6 pl-12 overflow-hidden max-h-[96vh]">
             {{ $slot }}
         </main>
     </div>

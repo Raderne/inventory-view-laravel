@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Product::class);
             $table->integer("quantity_changed");
             $table->string("type")->default("add");
+            $table->boolean("isRead")->default(false);
             $table->timestamps();
         });
     }

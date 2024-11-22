@@ -20,6 +20,7 @@ class InventoryLogFactory extends Factory
         return [
             "quantity_changed" => fake()->numberBetween(-100, 100),
             "type" => fake()->randomElement(["add", "remove"]),
+            "isRead" => false,
             "product_id" => Product::factory()
         ];
     }
