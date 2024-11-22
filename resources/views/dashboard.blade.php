@@ -15,8 +15,10 @@
             @include('components.create-product')
         </div>
         <div class="pl-4 py-2 grid grid-cols-3 gap-x-4">
-            <div class="col-span-2"></div>
-            <div class="bg-black rounded-2xl flex-center flex-col text-center overflow-hidden relative">
+            <!-- list of products -->
+            @include('components.products-list')
+
+            <div class="bg-black rounded-2xl flex-center flex-col max-h-[260px] text-center overflow-hidden relative">
                 <p class="text-white/60 text-sm">
                     Better Inventory Management With
                 </p>

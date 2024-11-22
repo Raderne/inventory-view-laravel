@@ -1,6 +1,6 @@
-<div class="h-full flex flex-col col-span-2">
+<div class="h-full flex flex-col col-span-2 border border-black/50 rounded-2xl">
     @auth
-    <h1 class="text-2xl font-semibold font-hanken-grotesk">Add a Product</h1>
+    <h1 class="text-xl font-semibold font-hanken-grotesk pl-4 pt-2">Add a Product</h1>
 
     <form method="post" action="/products/create" class="h-full grid grid-cols-2 gap-x-2">
         @csrf
@@ -14,6 +14,7 @@
             </div>
             <div>
                 <x-input-label for="supplier" :value="__('Supplier')" />
+                @if ($suppliers && count($suppliers) > 0)
                 <select name="supplier_id" id="supplier_id"
                     class="w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent font-hanken-grotesk">
                     <option value="default" selected disabled>Supplier</option>
@@ -22,6 +23,13 @@
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('supplier_id')" class="mt-2" />
+                @else
+                <div class="mt-4">
+                    <a href="/suppliers" class="px-4 py-2 border border-black/50 rounded-lg">
+                        add a supplier first
+                    </a>
+                </div>
+                @endif
             </div>
         </div>
 
@@ -31,7 +39,8 @@
             <div class="flex items-center gap-x-2">
                 <div>
                     <x-input-label for="price" :value="__('Price')" />
-                    <x-text-input id="price" class="block mt-1 w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent font-hanken-grotesk" type="number" name="price" :value="old('price')" required />
+                    <x-text-input id="price" class="block mt-1 w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent font-hanken-grotesk" type="text"
+                        name="price" :value="old('price')" required />
                     <x-input-error :messages="$errors->get('price')" class="mt-2" />
                 </div>
 

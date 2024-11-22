@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <div class="h-[90%] overflow-y-auto mt-3">
+    <div class="h-[90%] overflow-y-auto mt-2">
         {{ $slot }}
     </div>
 
