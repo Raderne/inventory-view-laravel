@@ -18,17 +18,15 @@ class InventoryLogController extends Controller
         return view('history.index', compact('inventoryLogs'));
     }
 
-    public function ChangeLog(Product $product, int $stock)
+    public function addLog(Product $product, int $stock)
     {
-        $inventoryLog = InventoryLog::find($product->id);
-
         $quantityChanged = $stock - $product->stock;
         $type = $quantityChanged > 0 ? 'add' : 'remove';
 
-        $inventoryLog->create([
-            "product_id" => $product->id,
-            "quantity_changed" => $quantityChanged,
-            "type" => $type,
+        InventoryLog::create([
+            'product_id' => $product->id,
+            'quantity_changed' => $quantityChanged,
+            'type' => $type,
         ]);
     }
 }

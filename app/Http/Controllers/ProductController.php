@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\InventoryLog;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -25,8 +26,9 @@ class ProductController extends Controller
     {
         $suppliers = Supplier::all()->sortBy('name');
         $products = Product::with("supplier")->latest()->get();
+        $usersCount = User::count();
 
-        return view("dashboard", compact('suppliers', "products"));
+        return view("dashboard", compact('suppliers', "products", "usersCount"));
     }
 
     public function store(Request $request)
@@ -71,7 +73,7 @@ class ProductController extends Controller
         ]);
 
         $inventoryLogController = new InventoryLogController();
-        $inventoryLogController->ChangeLog($product, $request->stock);
+        $inventoryLogController->addLog($product, $request->stock);
 
         $product->update([
             "name" => $request->name,
