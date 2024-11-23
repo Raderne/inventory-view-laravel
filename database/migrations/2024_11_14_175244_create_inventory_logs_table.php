@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('inventory_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete();
             $table->integer("quantity_changed");
             $table->string("type")->default("add");
             $table->boolean("isRead")->default(false);

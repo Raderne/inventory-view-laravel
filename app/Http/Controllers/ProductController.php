@@ -16,7 +16,9 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        return view('product.show', compact('product'));
+        $logs = InventoryLog::where("product_id", $product->id)->latest()->get();
+
+        return view('product.show', compact('product', "logs"));
     }
 
     public function create()
@@ -52,5 +54,39 @@ class ProductController extends Controller
         ]);
 
         return redirect("/")->with("success", "Product Created");
+    }
+
+    public function edit(Product $product)
+    {
+        return view("product.edit", compact("product"));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $request->validate([
+            "name" => ["required", "string"],
+            "sku" => ["required"],
+            "price" => ["required"],
+            "stock" => ["required"],
+        ]);
+
+        $inventoryLogController = new InventoryLogController();
+        $inventoryLogController->ChangeLog($product, $request->stock);
+
+        $product->update([
+            "name" => $request->name,
+            "sku" => $request->sku,
+            "price" => $request->price,
+            "stock" => $request->stock,
+        ]);
+
+        return redirect("/products/{$product->id}")->with("success", "Product Updated");
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return redirect("/")->with("success", "Product Deleted");
     }
 }
