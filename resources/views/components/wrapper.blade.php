@@ -1,4 +1,4 @@
-@props(['header' => null])
+@props(['header' => null, "notifications" => [], "dot" => false])
 
 <x-app-layout>
 
@@ -7,17 +7,23 @@
         <h1 class="text-4xl font-semibold font-hanken-grotesk text-gray-900 mb-3">{{ $header }}</h1>
         @endif
 
-        <div class="flex items-center gap-x-2">
+        <div class="flex items-center gap-x-2 ">
             @auth
-            <x-dropdown>
+            <x-dropdown width='w-auto min-w-max max-h-screen'>
                 <x-slot name="trigger">
-                    <i class='bx bx-bell text-2xl px-2 py-1'></i>
+                    <div class="relative" id="notification-trigger">
+                        <i class='bx bx-bell text-2xl px-2 py-1'></i>
+                        @if ($dot)
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" id="notify-dot"></span>
+                        @endif
+                    </div>
                 </x-slot>
 
                 <x-slot name="content">
-                    <div class="py-1 bg-white">
-                        <span class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Notifications</span>
-                        <span class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Messages</span>
+                    <div class="p-4 shadow-xl space-y-2 bg-white">
+                        @foreach ($notifications as $notification)
+                        <x-notification :notification="$notification" />
+                        @endforeach
                     </div>
                 </x-slot>
             </x-dropdown>

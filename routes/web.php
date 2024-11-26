@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [ProductController::class, 'index']);
+// Route::get('/', [ProductController::class, 'index']);
 Route::get('/', [ProductController::class, 'create']);
 
 Route::get('/staff', function () {
@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/history', [InventoryLogController::class, 'index']);
+    Route::post('/notifications', [InventoryLogController::class, 'markAsRead']);
 });
 
 require __DIR__ . '/auth.php';

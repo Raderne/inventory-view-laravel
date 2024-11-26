@@ -7,12 +7,16 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+
     public function index()
     {
-        return view('dashboard');
+        // check if the user is logged in
+
+        // return view('dashboard');
     }
 
     public function show(Product $product)
@@ -24,11 +28,29 @@ class ProductController extends Controller
 
     public function create()
     {
+        $notifications = [
+            "notificationsList" => [],
+            "notificationDot" => false,
+        ];
+
+        if (
+            Auth::user()
+        ) {
+            $inventoryLogController = new InventoryLogController();
+            $notifications = $inventoryLogController->notifications();
+        }
+
         $suppliers = Supplier::all()->sortBy('name');
         $products = Product::with("supplier")->latest()->get();
         $usersCount = User::count();
 
-        return view("dashboard", compact('suppliers', "products", "usersCount"));
+        return view("dashboard", [
+            "products" => $products,
+            "suppliers" => $suppliers,
+            "usersCount" => $usersCount,
+            "notifications" => $notifications['notificationsList'],
+            "notificationDot" => $notifications['notificationDot'],
+        ]);
     }
 
     public function store(Request $request)

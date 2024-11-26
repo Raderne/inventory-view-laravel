@@ -18,6 +18,13 @@ class InventoryLogController extends Controller
         return view('history.index', compact('inventoryLogs'));
     }
 
+    public function markAsRead()
+    {
+        $logs = InventoryLog::where("isRead", 0)->update(["isRead" => 1]);
+
+        return response()->json(["message" => "success"]);
+    }
+
     public function addLog(Product $product, int $stock)
     {
         $quantityChanged = $stock - $product->stock;
@@ -28,5 +35,23 @@ class InventoryLogController extends Controller
             'quantity_changed' => $quantityChanged,
             'type' => $type,
         ]);
+    }
+
+    public function notifications()
+    {
+        $notificationDot = false;
+        $notifications = InventoryLog::with(['product'])
+            ->limit(8)
+            ->latest()
+            ->get();
+
+        if ($notifications[0]->isRead === 0) {
+            $notificationDot = true;
+        }
+
+        return [
+            "notificationDot" => $notificationDot,
+            "notificationsList" => $notifications
+        ];
     }
 }

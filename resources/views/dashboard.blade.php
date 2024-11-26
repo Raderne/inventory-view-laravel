@@ -1,4 +1,4 @@
-<x-wrapper>
+<x-wrapper :notifications="$notifications" :dot="$notificationDot">
     <x-slot:header>
         Products
     </x-slot:header>
